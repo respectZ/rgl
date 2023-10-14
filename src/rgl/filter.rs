@@ -1,4 +1,4 @@
-use super::{FilterDeno, FilterNode, FilterRemote, RglError, RglResult};
+use super::{FilterDeno, FilterGo, FilterNode, FilterRemote, RglError, RglResult};
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
@@ -38,6 +38,7 @@ impl FilterDefinition {
             FilterDefinition::Local(def) => match def.run_with.as_str() {
                 "deno" => Box::new(FilterDeno::new(name, &def.script)),
                 "nodejs" => Box::new(FilterNode::new(name, &def.script)),
+                "go" => Box::new(FilterGo::new(name, &def.script)),
                 filter_type => {
                     return Err(RglError::FilterTypeNotSupported {
                         filter_type: filter_type.to_owned(),
