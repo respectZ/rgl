@@ -44,7 +44,7 @@ jobs:
         shell: bash
         run: |
           cd target/${{ matrix.platform.target }}/release
-          7z a ../../../rgl-${{ matrix.platform.target }}.zip ${{ matrix.platform.bin }}
+          tar -czvf ../../../rgl-${{ matrix.platform.target }}.tar.gz ${{ matrix.platform.bin }}
       - name: Generate SHA-256
         run: shasum -a 256 ${{ matrix.platform.name }}
         if: matrix.platform.os == 'macOS-latest'
